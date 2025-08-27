@@ -33,10 +33,17 @@
 | `use_tree=True`       | Use `rich.Tree` to visualize attribute hierarchy                      |
 | `filename="..."`      | Export to plain text (no ANSI codes)                                 |
 | `max_depth=3`         | Limit recursion depth                                                 |
+| `max_members=None`       | Limit the number of attributes displayed per object                   |
+| `console=None`           | Provide a custom `rich.Console` (e.g. for Jupyter or file capture)    |
+| `output_file=None`       | Write directly to an open file-like object                            |
+| `indent=0`               | Starting indentation level (useful when embedding explorer in scripts) |
+| `seen=None`              | Internal cycle protection (avoid infinite recursion)                  |
 
 ---
 
 ## 🚀 Example Usage
+
+### Python script
 
 ```python
 from explorer import explore_object_more
@@ -47,9 +54,18 @@ explore_object_more(
   show_private=True,
   recursive_bases=True,
   use_tree=True,
-  filename=None
+  max_depth=2
 )
+
 ```
+or  
+### IPython / Jupyter magic
+
+```python
+%explore_more matplotlib.transforms.Affine2D --show_private --recursive_bases --max_depth 2
+
+```
+
 ## 🧠 Why Use It?
 
 - 🧭 Explore unknown modules, classes, or instances interactively
@@ -70,5 +86,10 @@ explore_object_more(
 └── function: helper(x, y)
 </pre>
 
-![Terminal preview](assets/output_preview.png)
+## 🖥️ Output Examplefor `matplotlib.transforms` module object
+<p align="left">
+  <a href="Figures/Explore_python_object.png">
+    <img src="Figures/Explore_python_object.png" alt="Terminal output" width="400"/>
+  </a>
+</p>
 
